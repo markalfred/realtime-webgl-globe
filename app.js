@@ -1,6 +1,7 @@
 var Globe = window.Globe
 var Data = window.Data
-var div = document.getElementById('globe')
+var globeContainer = document.getElementById('globe-container')
+var labelsContainer = document.getElementById('labels-container')
 var dataset = Data.results.bindings
 var urls = {
   earth: 'img/world.jpg',
@@ -9,7 +10,7 @@ var urls = {
 }
 
 // create a globe
-var globe = new Globe(div, urls)
+var globe = new Globe(globeContainer, urls)
 
 // start it
 globe.init()
@@ -26,9 +27,16 @@ function getLatLon(point) {
   return [lat, lon]
 }
 
+function addLabel(label) {
+  var el = document.createElement('p')
+  el.textContent = label
+  labelsContainer.prepend(el)
+}
+
 var draw = function(i) {
   var point = dataset[i]
   var [lat, lon] = getLatLon(point)
+  var label = point.locationLabel.value
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
     size: 5,
@@ -38,6 +46,7 @@ var draw = function(i) {
 
   // console.log(i, point.locationLabel.value, d)
   globe.center(d)
+  addLabel(label)
 
   setTimeout(function() {
     // offset the lat/long so you can actually
