@@ -39,7 +39,7 @@ var draw = function(i) {
   var label = point.locationLabel.value
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
-    size: 5,
+    size: 50,
     lat: lat,
     lon: lon
   }
@@ -58,7 +58,7 @@ var draw = function(i) {
     globe.addLevitatingBlock(d)
   }, 10)
 
-  setTimeout(function() { return draw(i+1) }, 50)
+  setTimeout(function() { return draw(i+1) }, 500)
 }
 
 draw(0)

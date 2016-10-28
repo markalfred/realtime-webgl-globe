@@ -361,11 +361,11 @@ var Globe = function Globe(container, urls) {
     block.lookAt(earthPosition);
 
     block.scale.z = properties.size;
-    block.scale.x = properties.size;
-    block.scale.y = properties.size;
+    block.scale.x = 1;
+    block.scale.y = 1;
 
     block.updateMatrix();
-    
+
     return block;
   }
 
