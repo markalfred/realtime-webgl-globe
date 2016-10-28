@@ -11,6 +11,7 @@
       body {
         padding: 0;
         margin: 0;
+        color: white;
         background: black;
       }
 
@@ -21,10 +22,10 @@
         right: 10px;
         text-align: right;
         overflow: hidden;
+        pointer-events: none;
       }
 
       p {
-        color: white;
         margin: 0;
         transition: opacity 5s;
       }
@@ -33,6 +34,13 @@
         position: absolute;
         top: 10px;
         left: 10px;
+        pointer-events: none;
+      }
+
+      #controls-container {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
       }
 
     </style>
@@ -40,8 +48,11 @@
   <body>
     <main>
       <div id='globe-container'></div>
-      <p id="date">Placeholder</p>
+      <p id="date"></p>
       <div id='labels-container'></div>
+      <div id='controls-container'>
+        <label><input type="checkbox" id="spin-earth" checked>Center Last Battle</label>
+      </div>
     </main>
 
     </script>

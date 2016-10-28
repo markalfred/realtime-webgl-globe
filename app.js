@@ -8,10 +8,14 @@ var requestAnimationFrame =
 var Globe = window.Globe
 var Data = window.Data
 var moment = window.moment
+
 var globeContainer = document.getElementById('globe-container')
 var labelsContainer = document.getElementById('labels-container')
 var dateEl = document.getElementById('date')
+var spinEl = document.getElementById('spin-earth')
+
 var dataset = Data.results.bindings
+
 var urls = {
   earth: 'img/world.jpg',
   bump: 'img/bump.jpg',
@@ -54,7 +58,11 @@ var draw = function(point) {
   }
 
   addLabel(label)
-  globe.center({ lat: lat - 20, lon: lon })
+
+  if (spinEl.checked) {
+    globe.center({ lat: lat - 20, lon: lon })
+  }
+
   globe.addLevitatingBlock(d)
 }
 
@@ -87,6 +95,6 @@ var tick = function(date) {
 }
 
 var i = 0
-var startDate = '-1200-01-01T00:00:00Z'
+var startDate = '-500-01-01T00:00:00Z'
 
 tick(getDate(startDate))
