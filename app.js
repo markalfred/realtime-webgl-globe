@@ -31,6 +31,7 @@ function addLabel(label) {
   var el = document.createElement('p')
   el.textContent = label
   labelsContainer.prepend(el)
+  setTimeout(function() { el.style.opacity = 0 }, 1000)
 }
 
 var draw = function(i) {
@@ -49,7 +50,7 @@ var draw = function(i) {
   globe.center({ lat: lat - 20, lon: lon })
   globe.addLevitatingBlock(d)
 
-  setTimeout(function() { return draw(i+1) }, 500)
+  setTimeout(function() { return draw(i+1) }, 200)
 }
 
 draw(0)
