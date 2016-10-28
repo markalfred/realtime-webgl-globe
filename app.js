@@ -9,6 +9,14 @@ var Globe = window.Globe
 var Data = window.Data
 var moment = window.moment
 
+if (!Data) {
+  var query = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?format=json&query=SELECT%20%3Fcoord%20%3Fpoint_in_time%20%3FbattleLabel%20WHERE%20%7B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%20%20%3Fbattle%20wdt%3AP276%20%3Flocation.%0A%20%20%3Flocation%20wdt%3AP625%20%3Fcoord.%0A%20%20%3Fbattle%20wdt%3AP31%20wd%3AQ178561.%0A%20%20%3Fbattle%20wdt%3AP585%20%3Fpoint_in_time.%0A%7D%0AGROUP%20BY%20%3Fpoint_in_time%20%3Fcoord%20%3FbattleLabel%0AORDER%20BY%20%3Fpoint_in_time'
+  var xmlHttp = new XMLHttpRequest()
+  xmlHttp.open("GET", query, false)  // make it synchronous for now
+  xmlHttp.send(null)
+  Data = JSON.parse(xmlHttp.responseText)
+}
+
 var globeContainer = document.getElementById('globe-container')
 var labelsContainer = document.getElementById('labels-container')
 var dateEl = document.getElementById('date')
