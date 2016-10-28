@@ -178,7 +178,7 @@ var Globe = function Globe(container, urls) {
     block: function(color) {
       return new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshLambertMaterial({color: color})
+        new THREE.MeshLambertMaterial({color: color, transparent: true, opacity: 1})
       );
     }
 
@@ -327,6 +327,12 @@ var Globe = function Globe(container, urls) {
       altitude * Math.sin(y),
       altitude * Math.cos(x) * Math.cos(y)
     );
+
+    if (mesh.material) {
+      mesh.material.setValues({
+        opacity: mesh.material.opacity - 0.001
+      })
+    }
   }
 
   // Create a block mesh and set its position in 3d
@@ -361,8 +367,8 @@ var Globe = function Globe(container, urls) {
     block.lookAt(earthPosition);
 
     block.scale.z = properties.size;
-    block.scale.x = 1;
-    block.scale.y = 1;
+    block.scale.x = 2;
+    block.scale.y = 2;
 
     block.updateMatrix();
 
@@ -402,16 +408,15 @@ var Globe = function Globe(container, urls) {
     levitatingBlocks.forEach(function(block, i) {
 
       var userData = block.userData;
+      set3dPosition(block);
+      block.updateMatrix();
 
       // if entirely outide of earth, stop levitating
       if(userData.altitude > 200 + userData.size / 2) {
-        levitatingBlocks.splice(i, 1);
         return;
       }
 
       userData.altitude += userData.levitation;
-      set3dPosition(block);
-      block.updateMatrix();
     });
   }
 

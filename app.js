@@ -52,7 +52,7 @@ var draw = function(point) {
   var label = point.battleLabel.value
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
-    size: 50,
+    size: Math.random()*10,
     lat: lat,
     lon: lon
   }
