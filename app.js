@@ -49,7 +49,7 @@ function addLabel(label) {
 
 var draw = function(point) {
   var [lat, lon] = getLatLon(point)
-  var label = point.locationLabel.value
+  var label = point.battleLabel.value
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
     size: 50,
