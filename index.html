@@ -16,17 +16,22 @@
 
       #labels-container {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        padding: 10px;
-        color: white;
+        top: 10px;
+        bottom: 10px;
+        right: 10px;
         text-align: right;
       }
 
       p {
+        color: white;
         margin: 0;
         transition: opacity 5s;
+      }
+
+      #date {
+        position: absolute;
+        top: 10px;
+        left: 10px;
       }
 
     </style>
@@ -34,11 +39,13 @@
   <body>
     <main>
       <div id='globe-container'></div>
+      <p id="date">Placeholder</p>
       <div id='labels-container'></div>
     </main>
 
     </script>
     <script src='//cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js'></script>
     <script src='data.json'></script>
     <script src='globe.js'></script>
     <script src='app.js'></script>

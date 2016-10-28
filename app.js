@@ -1,7 +1,16 @@
+var requestAnimationFrame =
+  window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.oRequestAnimationFrame ||
+  window.msRequestAnimationFrame
+
 var Globe = window.Globe
 var Data = window.Data
+var moment = window.moment
 var globeContainer = document.getElementById('globe-container')
 var labelsContainer = document.getElementById('labels-container')
+var dateEl = document.getElementById('date')
 var dataset = Data.results.bindings
 var urls = {
   earth: 'img/world.jpg',
@@ -34,8 +43,7 @@ function addLabel(label) {
   setTimeout(function() { el.style.opacity = 0 }, 1000)
 }
 
-var draw = function(i) {
-  var point = dataset[i]
+var draw = function(point) {
   var [lat, lon] = getLatLon(point)
   var label = point.locationLabel.value
   var d = {
@@ -45,12 +53,40 @@ var draw = function(i) {
     lon: lon
   }
 
-  // console.log(i, point.locationLabel.value, d)
   addLabel(label)
   globe.center({ lat: lat - 20, lon: lon })
   globe.addLevitatingBlock(d)
-
-  setTimeout(function() { return draw(i+1) }, 200)
 }
 
-draw(0)
+function getDate(dateString) {
+  if (dateString[0] === '-') {
+    var absYear = dateString.split('-')[1]
+    var date = new Date(dateString.substr(1, Infinity))
+    date.setYear(absYear * -1)
+    return moment(date)
+  } else {
+    return moment(dateString)
+  }
+}
+
+var tick = function(date) {
+  var point = dataset[i]
+  if (!point) { return }
+
+  var pointDate = getDate(point.point_in_time.value)
+  if (date.isAfter(pointDate)) {
+    dateEl.textContent = pointDate.format('MM YYYY')
+    draw(point)
+    i = i + 1
+  } else {
+    dateEl.textContent = date.format('MM YYYY')
+    date.add(1, 'month')
+  }
+
+  requestAnimationFrame(function() { tick(date) })
+}
+
+var i = 0
+var startDate = '-1200-01-01T00:00:00Z'
+
+tick(getDate(startDate))
