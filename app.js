@@ -14,9 +14,21 @@ var globe = new Globe(div, urls)
 // start it
 globe.init()
 
+function getLatLon(point) {
+  var [lon, lat] = point
+    .coord
+    .value
+    .replace('Point(', '')
+    .replace(')', '')
+    .split(' ')
+    .map(parseFloat)
+
+  return [lat, lon]
+}
+
 var draw = function(i) {
   var point = dataset[i]
-  var [lon, lat] = point.coord.value.replace('Point(', '').replace(')', '').split(' ')
+  var [lat, lon] = getLatLon(point)
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
     size: 5,
@@ -24,6 +36,7 @@ var draw = function(i) {
     lon: lon
   }
 
+  // console.log(i, point.locationLabel.value, d)
   globe.center(d)
 
   setTimeout(function() {
@@ -34,9 +47,9 @@ var draw = function(i) {
     d.lon += 10
 
     globe.addLevitatingBlock(d)
-  }, 30)
+  }, 10)
 
-  setTimeout(function() { return draw(i+1) }, 100)
+  setTimeout(function() { return draw(i+1) }, 50)
 }
 
 draw(0)
