@@ -16,7 +16,7 @@ globe.init()
 
 var draw = function(i) {
   var point = dataset[i]
-  var [lon, lat] = point.coord.value.replace('Point(', '').replace(')', '').split(' ')
+  var [lat, lon] = point.coord.value.replace('Point(', '').replace(')', '').split(' ')
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
     size: 5,
@@ -34,9 +34,9 @@ var draw = function(i) {
     d.lon += 10
 
     globe.addLevitatingBlock(d)
-  }, 300)
+  }, 30)
 
-  setTimeout(function() { return draw(i+1) }, 1000)
+  setTimeout(function() { return draw(i+1) }, 100)
 }
 
 draw(0)
