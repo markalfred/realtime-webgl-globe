@@ -286,8 +286,8 @@ var Globe = function Globe(container, urls) {
 
     // Determine light position based
     set3dPosition(light, {
-      x: rotation.x - 150,
-      y: rotation.y - 150,
+      x: rotation.x,
+      y: rotation.y + 150,
       altitude: distance
     });
 
