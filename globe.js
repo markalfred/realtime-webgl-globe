@@ -40,9 +40,9 @@ var Globe = function Globe(container, urls) {
   var blocks = [];
 
   // What gets exposed by calling:
-  // 
+  //
   //    var globe = [new] Globe(div, urls);
-  // 
+  //
   // attach public functions to this object
   var api = {};
 
@@ -76,7 +76,7 @@ var Globe = function Globe(container, urls) {
 
     // Add lights to scene
     scene.add(new THREE.AmbientLight(0x656565));
-    scene.add(light);    
+    scene.add(light);
 
     // Renderer
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -109,13 +109,13 @@ var Globe = function Globe(container, urls) {
   var createMesh = {
 
     // @param urls Object URLs of images
-    // 
+    //
     //  {
     //    earth: String URL
     //    bump: Sting URL [optional]
     //    specular: String URL [optional]
     //  }
-    //  
+    //
     // See
     // @link http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
     // @link http://learningthreejs.com/data/2013-09-16-how-to-make-the-earth-in-webgl/demo/index.html
@@ -125,7 +125,7 @@ var Globe = function Globe(container, urls) {
 
       var material  = new THREE.MeshPhongMaterial();
       material.map = THREE.ImageUtils.loadTexture(urls.earth);
-      
+
       if(urls.bump) {
         material.bump = THREE.ImageUtils.loadTexture(urls.bump);
         material.bumpScale = 0.02;
@@ -142,7 +142,7 @@ var Globe = function Globe(container, urls) {
     // See
     // @link https://github.com/dataarts/webgl-globe/blob/master/globe/globe.js#L52
     // @link http://bkcore.com/blog/3d/webgl-three-js-animated-selective-glow.html
-    // 
+    //
     // Currently has some issues, especially when zooming out (distance > 900)
     atmosphere: function() {
       var material = new THREE.ShaderMaterial({
@@ -297,7 +297,7 @@ var Globe = function Globe(container, urls) {
 
   // @param Object position (2d lat/lon coordinates)
   // @return Object coords (x/y coordinates)
-  // 
+  //
   // Calculates x, y coordinates based on
   // lat/lon coordinates.
   var calculate2dPosition = function(coords) {
@@ -312,7 +312,7 @@ var Globe = function Globe(container, urls) {
 
   // @param Mesh object
   // @param Object coords (x/y coordinates in 2d space + altitute)
-  // 
+  //
   // Calculates 3d position and sets it on mesh
   var set3dPosition = function(mesh, coords) {
     if(!coords)
@@ -353,7 +353,7 @@ var Globe = function Globe(container, urls) {
 
       size: properties.size
     }
-    
+
     // calculate 3d position
     set3dPosition(block);
 
@@ -392,7 +392,7 @@ var Globe = function Globe(container, urls) {
     block.scale.y = properties.size;
 
     block.updateMatrix();
-    
+
     return block;
   }
 
@@ -422,7 +422,7 @@ var Globe = function Globe(container, urls) {
    * (passing a positive number will zoom towards
    * the earth, while a negative number will zoom
    * away from earth).
-   * 
+   *
    * @param  {Integer} delta
    * @return {this}
    */
@@ -460,7 +460,7 @@ var Globe = function Globe(container, urls) {
 
     return this;
   }
-   
+
   /**
    * Transition the globe from its current position
    * to the new coordinates.
@@ -531,12 +531,12 @@ var Globe = function Globe(container, urls) {
   }
   /**
    * Remove all blocks from the globe.
-   * 
+   *
    * @return {this}
    */
   api.removeAllBlocks = function() {
     blocks.forEach(function(block) {
-      scene.remove(block);  
+      scene.remove(block);
     });
 
     blocks = [];
