@@ -45,18 +45,9 @@ var draw = function(i) {
   }
 
   // console.log(i, point.locationLabel.value, d)
-  globe.center(d)
   addLabel(label)
-
-  setTimeout(function() {
-    // offset the lat/long so you can actually
-    // see the block levitating
-
-    d.lat += 10
-    d.lon += 10
-
-    globe.addLevitatingBlock(d)
-  }, 10)
+  globe.center({ lat: lat - 20, lon: lon })
+  globe.addLevitatingBlock(d)
 
   setTimeout(function() { return draw(i+1) }, 500)
 }
