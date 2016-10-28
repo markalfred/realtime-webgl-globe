@@ -16,7 +16,7 @@ globe.init()
 
 var draw = function(i) {
   var point = dataset[i]
-  var [lat, lon] = point.coord.value.replace('Point(', '').replace(')', '').split(' ')
+  var [lon, lat] = point.coord.value.replace('Point(', '').replace(')', '').split(' ')
   var d = {
     color: '#'+Math.floor(Math.random()*16777215).toString(16),
     size: 5,
